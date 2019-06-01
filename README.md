@@ -1,5 +1,9 @@
 # Godot Lesson
 
+# Camera Far Away
+聚焦在多个对象上，镜头伸缩
+![](camera_faraway.gif)
+
 # Random Ground Map
 ### 随机地图贴图
 ![](random_ground_map.gif)

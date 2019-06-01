@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Wall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://PlayerA.tscn" type="PackedScene" id=4]
+[ext_resource path="res://PlayerB.tscn" type="PackedScene" id=5]
+
+[node name="MajorScene" type="Node2D"]
+
+[node name="Wall" parent="." instance=ExtResource( 1 )]
+position = Vector2( 510, -20 )
+scale = Vector2( 54.812, 2.05201 )
+
+[node name="Wall2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 510, 620 )
+scale = Vector2( 54.812, 2.05201 )
+
+[node name="Wall3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1040, 300 )
+rotation = -1.57079
+scale = Vector2( 34.172, 2.05201 )
+
+[node name="Wall4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -19.9998, 300 )
+rotation = -1.57079
+scale = Vector2( 34.172, 2.05201 )
+
+[node name="Ground" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 3 )
+debug_mode = true
+
+[node name="PlayerA" parent="Camera2D" instance=ExtResource( 4 )]
+position = Vector2( 220.932, 300 )
+control_side = "p1"
+
+[node name="PlayerB" parent="Camera2D" instance=ExtResource( 5 )]
+position = Vector2( 800, 300 )
