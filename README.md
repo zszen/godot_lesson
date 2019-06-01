@@ -1,6 +1,12 @@
 # Godot Lesson
 ______________________
 
+# Navigation
+躲避tilemap的障碍，简单寻路
+
+![](navigation2d.gif)
+______________________
+
 # Follow Player
 当检测到玩家在附近，则开始追逐玩家，碰到会扣血。当玩家逃离后不再追逐。
 
