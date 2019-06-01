@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ground.tres" type="Material" id=1]
+[ext_resource path="res://ball.tres" type="Material" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SphereMesh" id=2]
+
+[node name="Simple3D" type="Spatial"]
+
+[node name="Plant" type="MeshInstance" parent="."]
+transform = Transform( 3.1902, 0, 0, 0, 1, 0, 0, 0, 3.1902, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sphere" type="MeshInstance" parent="."]
+transform = Transform( 0.999592, 0, 0, 0, 0.999592, 0, 0, 0, 0.999592, -0.00403357, 1.18692, -0.00520551 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.990988, 0.078237, -0.108732, -0.0408872, 0.596307, 0.801715, 0.127561, 0.798935, -0.587734, 0, 3.6612, -4.28362 )
+shadow_enabled = true

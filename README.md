@@ -1,5 +1,9 @@
 # Godot Lesson
 
+# Random Ground Map
+### 随机地图贴图
+![](random_ground_map.gif)
+
 # ship
 ### 学习通过vs和gd两种不同方式控制小船
 

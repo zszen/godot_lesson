@@ -1,0 +1,22 @@
+[gd_resource type="SpatialMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://assets/[2K]Metal06/Metal06_col.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/[2K]Metal06/Metal06_disp.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/[2K]Metal06/Metal06_met.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/[2K]Metal06/Metal06_nrm.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/[2K]Metal06/Metal06_rgh.jpg" type="Texture" id=5]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+metallic = 0.8
+metallic_texture = ExtResource( 3 )
+roughness_texture = ExtResource( 5 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 2 )

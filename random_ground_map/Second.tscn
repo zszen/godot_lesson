@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GameWorld.tscn" type="PackedScene" id=1]
+
+[node name="Second" type="Node2D"]
+
+[node name="GameWorld" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+
+[editable path="GameWorld"]

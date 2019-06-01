@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GameWorld.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/SourceCodePro-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[node name="GameWorld" type="Node2D"]
+script = ExtResource( 1 )
+inner_size = Vector2( 15, 10 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 23.0
+margin_top = 20.0
+margin_right = 375.0
+margin_bottom = 71.0
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "Press Change Map"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
