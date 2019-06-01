@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snap.png-13d8987ce20ab72e0cc70b42f5f23abd.stex"
+path="res://.import/Enemy_Large.png-e09bd5adc6796182929998968d15b19c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://snap.png"
-dest_files=[ "res://.import/snap.png-13d8987ce20ab72e0cc70b42f5f23abd.stex" ]
+source_file="res://assets/ship/Enemy_Large.png"
+dest_files=[ "res://.import/Enemy_Large.png-e09bd5adc6796182929998968d15b19c.stex" ]
 
 [params]
 
