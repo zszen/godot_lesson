@@ -1,6 +1,12 @@
 # Godot Lesson
 ______________________
 
+# Music
+音乐跟随场景互动
+
+![](music.png)
+______________________
+
 # Navigation
 躲避tilemap的障碍，简单寻路
 

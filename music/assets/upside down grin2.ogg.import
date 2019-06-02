@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/upside down grin2.ogg-2ccc6083195a96fa7fa1915df30110dc.oggstr"
+
+[deps]
+
+source_file="res://assets/upside down grin2.ogg"
+dest_files=[ "res://.import/upside down grin2.ogg-2ccc6083195a96fa7fa1915df30110dc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
