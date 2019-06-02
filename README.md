@@ -1,6 +1,12 @@
 # Godot Lesson
 ______________________
 
+# 3D Shader Water
+shader制作的水面
+
+![](shaders_shader.gif)
+______________________
+
 # Music
 音乐跟随场景互动
 

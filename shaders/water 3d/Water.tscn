@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Water.tres" type="Material" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 4, 4 )
+subdivide_width = 80
+subdivide_depth = 80
+
+[sub_resource type="PlaneMesh" id=2]
+
+[node name="WaterPool" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.991087, 0.133202, 0.0020189, -0.0675136, 0.489152, 0.869581, 0.114843, -0.861967, 0.493786, -0.443, 1.752, 2.131 )
+current = true
+fov = 72.7
+far = 1024.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.436831, 0.406978, -0.802214, 0.241048, 0.806227, 0.540272, 0.866646, -0.42938, 0.254083, 6.78724, 2.92466, -7.70904 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 2.76683, 0, 0, 0, 1, 0, 0, 0, 2.76683, 0, -3.29941, 0 )
+mesh = SubResource( 2 )
+material/0 = null

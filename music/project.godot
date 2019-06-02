@@ -24,6 +24,14 @@ config/name="music"
 run/main_scene="res://MajorScene.tscn"
 config/icon="res://icon.png"
 
+[layer_names]
+
+2d_physics/layer_1="def"
+2d_physics/layer_2="player"
+2d_physics/layer_3="chest"
+2d_physics/layer_4="enmey"
+2d_physics/layer_5="block"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
