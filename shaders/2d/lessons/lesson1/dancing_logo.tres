@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://lessons/lesson1/dancing_logo.shader" type="Shader" id=1]
+
+
+
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/time_factor = 1.0
+shader_param/amplitude = Vector2( 10, 5 )

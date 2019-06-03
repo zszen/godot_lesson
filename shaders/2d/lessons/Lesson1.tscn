@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://lessons/lesson1/dancing_logo.tres" type="Material" id=1]
+[ext_resource path="res://assets/icon.png" type="Texture" id=2]
+[ext_resource path="res://lessons/lesson1/icon.gd" type="Script" id=3]
+[ext_resource path="res://lessons/lesson1/SliderControl.tscn" type="PackedScene" id=4]
+
+
+
+[node name="Lesson1" type="Node2D"]
+
+[node name="icon" type="Sprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( 92.6301, 87.3609 )
+texture = ExtResource( 2 )
+offset = Vector2( 435, 124 )
+script = ExtResource( 3 )
+
+[node name="SliderControl" parent="." instance=ExtResource( 4 )]
+margin_left = 520.027
+margin_top = 319.991
+margin_right = 520.027
+margin_bottom = 319.991
+label = "time_scale"
+val_now = 1
+val_max = 20
+
+[node name="SliderControl2" parent="." instance=ExtResource( 4 )]
+margin_left = 520.0
+margin_top = 360.979
+margin_right = 520.0
+margin_bottom = 360.979
+label = "amplitude x"
+val_now = 1
+val_max = 20
+
+[node name="SliderControl3" parent="." instance=ExtResource( 4 )]
+margin_left = 520.0
+margin_top = 401.958
+margin_right = 520.0
+margin_bottom = 401.958
+label = "amplitude y"
+val_now = 1
+val_max = 20
+[connection signal="changed" from="SliderControl" to="icon" method="_on_SliderControl_changed"]
+[connection signal="changed" from="SliderControl2" to="icon" method="_on_SliderControl2_changed"]
+[connection signal="changed" from="SliderControl3" to="icon" method="_on_SliderControl3_changed"]

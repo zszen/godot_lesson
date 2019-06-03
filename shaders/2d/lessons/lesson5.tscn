@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://lessons/lesson5/lesson5.shader" type="Shader" id=1]
+[ext_resource path="res://assets/water_uv_offset.png" type="Texture" id=2]
+[ext_resource path="res://assets/water_diffuse.png" type="Texture" id=3]
+[ext_resource path="res://lessons/lesson5/water_diffuse5.gd" type="Script" id=4]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/shadow_color = Color( 0.894118, 0.894118, 0.894118, 0.309804 )
+shader_param/tiled_factor = 10.0
+shader_param/aspect_ratio = 0.5
+shader_param/texture_offset_scale = Vector2( 0.2, 0.2 )
+shader_param/texture_offset_height = 0.1
+shader_param/texture_offset_time_scale = 0.05
+shader_param/sine_time_scale = 3.01
+shader_param/sine_offset_scale = Vector2( 0.4, 1.12 )
+shader_param/sine_wave_size = 0.4
+shader_param/texture_offset_uv = ExtResource( 2 )
+
+[node name="lesson5" type="Node2D"]
+
+[node name="water_diffuse" type="Sprite" parent="."]
+show_behind_parent = true
+material = SubResource( 1 )
+position = Vector2( 516.033, 300.368 )
+scale = Vector2( 4.06183, 2.44003 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+[connection signal="item_rect_changed" from="water_diffuse" to="water_diffuse" method="_on_water_diffuse_item_rect_changed"]

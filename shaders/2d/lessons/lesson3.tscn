@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://lesson3/lesson3.shader" type="Shader" id=1]
+[ext_resource path="res://assets/water_uv_offset.png" type="Texture" id=2]
+[ext_resource path="res://assets/water_diffuse.png" type="Texture" id=3]
+[ext_resource path="res://assets/water_normal.png" type="Texture" id=4]
+[ext_resource path="res://lesson3/water_diffuse3.gd" type="Script" id=5]
+[ext_resource path="res://assets/light.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/tiled_factor = 2.16
+shader_param/aspect_ratio = 0.06
+shader_param/uv_offset_size = Vector2( 1, 1 )
+shader_param/wave_size = Vector2( 0.76, 0.4 )
+shader_param/time_scale = 0.05
+shader_param/uv_offset_texture = ExtResource( 2 )
+
+[node name="lesson3" type="Node2D"]
+
+[node name="water_diffuse" type="Sprite" parent="."]
+show_behind_parent = true
+material = SubResource( 1 )
+position = Vector2( 521.66, 308.946 )
+scale = Vector2( 4.11464, 2.48641 )
+texture = ExtResource( 3 )
+normal_map = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="water_diffuse"]
+position = Vector2( 7.04175, 1.41266 )
+scale = Vector2( 1.56164, 2.73756 )
+texture = ExtResource( 6 )
+color = Color( 0.498039, 0.921569, 0.921569, 1 )
+energy = 2.46
+[connection signal="item_rect_changed" from="water_diffuse" to="water_diffuse" method="_on_water_diffuse_item_rect_changed"]

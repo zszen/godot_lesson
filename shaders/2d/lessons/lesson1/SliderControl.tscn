@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://lessons/lesson1/SliderControl.gd" type="Script" id=1]
+
+
+
+
+[node name="SliderControl" type="Control"]
+margin_left = 84.5922
+margin_top = 21.1029
+margin_right = 84.5922
+margin_bottom = 21.1029
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+label = "test"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -44.5
+margin_top = -14.0
+margin_right = 44.5
+text = "value:"
+
+[node name="HSlider" type="HSlider" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -74.0
+margin_top = 1.0
+margin_right = 74.0
+margin_bottom = 17.0
+step = 0.1
+[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]
