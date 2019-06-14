@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://res/icon.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment(){
+	COLOR.r+=.1;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="test_rect" type="Node2D"]
+
+[node name="icon" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 554.162, 259.067 )
+scale = Vector2( 2.03545, 2.03545 )
+texture = ExtResource( 1 )

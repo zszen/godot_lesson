@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://test_word_pixel.shader" type="Shader" id=1]
+[ext_resource path="res://res/Preahvihear.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 2 )
+
+[node name="test_word_pixel" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+material = SubResource( 5 )
+margin_left = 35.5423
+margin_top = 64.5326
+margin_right = 193.542
+margin_bottom = 145.533
+rect_scale = Vector2( 5.99939, 5.99939 )
+custom_fonts/font = SubResource( 1 )
+text = "ខ្ញុំបានមើលព្យុះ ដែលមានភាពស្រស់ស្អាតណាស់ ប៉ុន្តែគួរឲ្យខ្លា"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
