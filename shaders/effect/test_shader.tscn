@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://shaders/outline_thick.shader" type="Shader" id=1]
+[ext_resource path="res://res/draw.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/SAMPLES = 6
+shader_param/WIDTH = 4.0
+shader_param/OUTLINE_COLOR = Plane( 0, 0, 0, 1 )
+shader_param/TEXTURE_SCALE = Vector2( 0.94, 0.94 )
+
+[node name="test_shader" type="Node2D"]
+
+[node name="draw" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 315.132, 146.482 )
+texture = ExtResource( 2 )
+
+[node name="draw" type="Sprite" parent="draw"]
+position = Vector2( -153.952, 2.60724 )
+texture = ExtResource( 2 )

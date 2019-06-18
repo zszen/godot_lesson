@@ -1,0 +1,53 @@
+[gd_resource type="VisualShader" load_steps=3 format=2]
+
+[sub_resource type="VisualShaderNodeInput" id=1]
+output_port_for_preview = 0
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id=2]
+output_port_for_preview = 0
+source = 2
+
+[resource]
+code = "shader_type canvas_item;
+
+
+
+void vertex() {
+// 日志:0
+
+}
+
+void fragment() {
+// 输入:3
+	vec3 n_out3p0;
+	n_out3p0 = vec3(UV,0.0);
+
+// Texture:5
+	vec3 n_out5p0;
+	float n_out5p1;
+	{
+		vec4 _tex_read = texture( TEXTURE , n_out3p0.xy );
+		n_out5p0 = _tex_read.rgb;
+		n_out5p1 = _tex_read.a;
+	}
+
+// 日志:0
+	COLOR.rgb = n_out5p0;
+	COLOR.a = n_out5p1;
+
+}
+
+void light() {
+// 日志:0
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 1740, 180 )
+nodes/fragment/3/node = SubResource( 1 )
+nodes/fragment/3/position = Vector2( 40, 160 )
+nodes/fragment/5/node = SubResource( 2 )
+nodes/fragment/5/position = Vector2( 760, 140 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 5, 0, 5, 0, 0, 0, 5, 1, 0, 1 )
