@@ -1,22 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://shaders/outline_thick.shader" type="Shader" id=1]
-[ext_resource path="res://res/draw.png" type="Texture" id=2]
+[ext_resource path="res://res/draw.png" type="Texture" id=1]
+[ext_resource path="res://shaders/outline_thick_circle.shader" type="Shader" id=2]
+[ext_resource path="res://res/food-strawberry.png" type="Texture" id=3]
+[ext_resource path="res://shaders/outline_thick_gaussian_h.shader" type="Shader" id=4]
+[ext_resource path="res://shaders/outline_thick_gaussian.shader" type="Shader" id=5]
+[ext_resource path="res://res/Snip20190619_24.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/SAMPLES = 12
+shader_param/WIDTH = 9.28
+shader_param/OUTLINE_COLOR = Plane( 0, 0, 0, 1 )
+shader_param/TEXTURE_SCALE = Vector2( 0.8, 0.8 )
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
+shader = ExtResource( 4 )
 shader_param/SAMPLES = 6
 shader_param/WIDTH = 4.0
 shader_param/OUTLINE_COLOR = Plane( 0, 0, 0, 1 )
 shader_param/TEXTURE_SCALE = Vector2( 0.94, 0.94 )
 
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 5 )
+
 [node name="test_shader" type="Node2D"]
 
-[node name="draw" type="Sprite" parent="."]
-material = SubResource( 2 )
-position = Vector2( 315.132, 146.482 )
-texture = ExtResource( 2 )
+[node name="draw2" type="Sprite" parent="."]
+position = Vector2( 160.583, 149.089 )
+texture = ExtResource( 1 )
 
-[node name="draw" type="Sprite" parent="draw"]
-position = Vector2( -153.952, 2.60724 )
-texture = ExtResource( 2 )
+[node name="draw" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 312.176, 159.694 )
+texture = ExtResource( 1 )
+
+[node name="draw4" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 316.045, 300.183 )
+texture = ExtResource( 3 )
+
+[node name="draw3" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 469.388, 146.482 )
+texture = ExtResource( 1 )
+
+[node name="food-strawberry" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( 468.687, 303.615 )
+texture = ExtResource( 3 )
+
+[node name="Snip20190619_24" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 705.29, 199.386 )
+texture = ExtResource( 6 )

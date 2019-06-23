@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform int SAMPLES = 6;
+uniform int SAMPLES = 1;
 uniform float WIDTH = 4.0;
 uniform vec4 OUTLINE_COLOR = vec4(0.,0.,0.,1.);
 
