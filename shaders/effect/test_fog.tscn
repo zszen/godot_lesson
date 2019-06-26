@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://shaders/fog.shader" type="Shader" id=1]
+[ext_resource path="res://res/icon.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/color = Vector3( 0.35, 0.48, 0.7 )
+shader_param/OCTAVES = 4
+
+[node name="test_fog" type="Node2D"]
+
+[node name="icon" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 405.916, 244.019 )
+scale = Vector2( 3.43682, 3.43682 )
+texture = ExtResource( 2 )
