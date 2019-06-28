@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="shader_effect"
-run/main_scene="res://test_shader.tscn"
+run/main_scene="res://test_walk_dust.tscn"
 config/icon="res://res/icon.png"
 
 [rendering]

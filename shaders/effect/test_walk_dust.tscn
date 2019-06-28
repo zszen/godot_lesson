@@ -1,15 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://res/icon.png" type="Texture" id=1]
-[ext_resource path="res://pt_dust/pt_dust_1.png" type="Texture" id=2]
-[ext_resource path="res://pt_dust/pt_dust_2.png" type="Texture" id=3]
-[ext_resource path="res://pt_dust/pt_dust_3.png" type="Texture" id=4]
-[ext_resource path="res://pt_dust/pt_dust_4.png" type="Texture" id=5]
-
-[sub_resource type="PhysicsMaterial" id=1]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 63.8165, 64.4182 )
+[ext_resource path="res://pt_dust/pt_dust_1.png" type="Texture" id=1]
+[ext_resource path="res://pt_dust/pt_dust_2.png" type="Texture" id=2]
+[ext_resource path="res://pt_dust/pt_dust_3.png" type="Texture" id=3]
+[ext_resource path="res://pt_dust/pt_dust_4.png" type="Texture" id=4]
+[ext_resource path="res://res/icon.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends KinematicBody2D
@@ -31,11 +26,26 @@ var gravity = GRAVITY
 var distance = Vector2()
 var velocity = Vector2()
 var direction = Vector2()
-var is_floor_once = false;
+#var floor_idle_count = 0;
+var dust_percent = 0.0
+var on_floor_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ptsable(dust_percent, false)
 	pass # Replace with function body.
+
+func ptsable(ps:float, is_drop:bool):
+	for i in range(1,9):
+#		var ps_unit = i/8.0
+#		var bl = ps_unit<ps
+		var pts = get_node(\"Node2D/Particles2D%d\"%(i))
+		pts.emitting = randf()<=ps
+#		if bl:
+#			pts.amount = 10+randi()%20
+	for i in range(9,13):
+		var pts = get_node(\"Node2D2/Particles2D%d\"%(i))
+		pts.emitting = is_drop
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -43,8 +53,10 @@ func _ready():
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_LEFT):
+#		floor_idle_count = 2
 		speed = WALK_SPEED
 	elif Input.is_key_pressed(KEY_RIGHT):
+#		floor_idle_count = 2
 		speed = WALK_SPEED
 	if Input.is_action_just_pressed(\"ui_up\"):
 		jump_speed = JUMP_SPEED
@@ -57,35 +69,71 @@ func _physics_process(delta):
 	velocity.y += gravity*delta
 #	if Input.is_action_just_pressed(\"ui_up\"):
 #		v.y+=jump
-	print(is_on_floor())
+#	print(is_on_floor())
+#	print(velocity)
+	
 	move_and_slide(velocity,Vector2(0,-1))
+	dust_percent = 0
+	if !is_on_floor():
+		on_floor_count = 0
 	for idx in range(get_slide_count()):
 		var get_col = get_slide_collision(idx)
 		if is_on_floor():
-			if !is_floor_once:
-				is_floor_once = true
-				for i in range(4):
-					get_node(\"Particles2D%d\"%(i+1)).emitting = true
-					get_node(\"Particles2D%d\"%(i+1)).restart()
-#				$Particles2D.emitting = true
-#				$Particles2D.restart()
-#				$Particles2D.emitting = true
-#				$Particles2D.restart()
-#				$Particles2D.emitting = true
-#				$Particles2D.restart()
-#				$Particles2D.emitting = true
-#				$Particles2D.restart()
+			velocity.y = 0
+			on_floor_count+=1
+#			dust_percent = 1
+#			floor_idle_count+=1
+#			floor_idle_count = 0 
+#			if !is_floor_once:
+#				is_floor_once = true
+#				for i in range(8):
+#					get_node(\"Particles2D%d\"%(i+1)).emitting = true
+#					get_node(\"Particles2D%d\"%(i+1)).restart()
 #				print(1)
 			if Input.is_action_just_pressed(\"ui_up\"):
 				velocity.y = -jump_speed
 				direction.y = 1
-				
-	if !is_on_floor():
-		is_floor_once = false
+#	if velocity!=Vector2.ZERO:
+##		dust_percent = abs(velocity.x*velocity.y)/10.0
+##		print(1.0/abs(velocity.y))
+#		dust_percent = 0
+#		if abs(velocity.y)<150:
+#			dust_percent+=abs(velocity.y)/150;
+		
+#		dust_percent = 1.0/abs(velocity.y)+abs(velocity.x)/1000.0
+#	else:
+#		dust_percent = 1
+	if on_floor_count>0 && on_floor_count<10:
+		dust_percent+=1-on_floor_count/10.0
+	if on_floor_count>0 && abs(direction.x)!=0 :
+		dust_percent+=randf()*.6*sin(on_floor_count/2.0)
+#	else:
+#		dust_percent+=-1
+#	if !is_on_floor():
+#		floor_idle_count = 0
+#	if !is_on_floor():
+	ptsable(dust_percent, on_floor_count>0 && on_floor_count<10)
+#	print(floor_idle_count)
+#	if dust_percent==1:
+#		is_floor_once = false
+#		ptsable(true)
+#	elif floor_idle_count==3:
+##		is_floor_once = false
+#		ptsable(randf()>.65)
+#	elif floor_idle_count==30:
+#		ptsable(false)
+		
 
 func _on_KinematicBody2D_input_event(viewport, event, shape_idx):
 	pass # Replace with function body.
 "
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.00229885, 0.905747, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
 
 [sub_resource type="Image" id=12]
 data = {
@@ -96,7 +144,7 @@ data = {
 "width": 2048
 }
 
-[sub_resource type="ImageTexture" id=9]
+[sub_resource type="ImageTexture" id=5]
 flags = 0
 flags = 0
 image = SubResource( 12 )
@@ -111,101 +159,187 @@ data = {
 "width": 2048
 }
 
-[sub_resource type="ImageTexture" id=11]
+[sub_resource type="ImageTexture" id=7]
 flags = 0
 flags = 0
 image = SubResource( 13 )
 size = Vector2( 2048, 1 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 emission_shape = 3
-emission_point_texture = SubResource( 11 )
-emission_color_texture = SubResource( 9 )
+emission_point_texture = SubResource( 7 )
+emission_color_texture = SubResource( 5 )
 emission_point_count = 1849
 flag_disable_z = true
 spread = 0.0
-gravity = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, -20, 0 )
 angular_velocity = 1.55544e-43
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 4.0
+color_ramp = SubResource( 11 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 61.2676, 61.87 )
 
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 63.8165, 64.4182 )
+
 [node name="test_walk" type="Node2D"]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 456.619, 422.158 )
-scale = Vector2( 5.3891, 1 )
-physics_material_override = SubResource( 1 )
-
-[node name="icon" type="Sprite" parent="StaticBody2D"]
-modulate = Color( 0, 0, 0, 1 )
-texture = ExtResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 446.492, 174.401 )
 scale = Vector2( 0.274967, 0.274967 )
 script = SubResource( 3 )
 
-[node name="icon2" type="Sprite" parent="KinematicBody2D"]
+[node name="Node2D" type="Node2D" parent="KinematicBody2D"]
+position = Vector2( 5.91174, 25.6174 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Particles2D1" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( -97.6216, 8.69354 )
+amount = 20
+lifetime = 0.8
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
 texture = ExtResource( 1 )
 
-[node name="Particles2D1" type="Particles2D" parent="KinematicBody2D"]
-position = Vector2( -71.3475, 21.8304 )
-emitting = false
-amount = 100
-one_shot = true
-preprocess = 1.1
-explosiveness = 0.5
+[node name="Particles2D2" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( -13.1702, -74.304 )
+amount = 20
+lifetime = 0.5
 randomness = 1.0
 fract_delta = false
 local_coords = false
-process_material = SubResource( 6 )
+process_material = SubResource( 8 )
 texture = ExtResource( 2 )
 
-[node name="Particles2D2" type="Particles2D" parent="KinematicBody2D"]
-position = Vector2( -0.0328369, 4.51855 )
-emitting = false
-amount = 100
-one_shot = true
-preprocess = 1.1
-explosiveness = 0.5
+[node name="Particles2D3" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( -9.19531, -30.1395 )
+amount = 20
+lifetime = 0.5
 randomness = 1.0
 fract_delta = false
 local_coords = false
-process_material = SubResource( 6 )
+process_material = SubResource( 8 )
 texture = ExtResource( 3 )
 
-[node name="Particles2D3" type="Particles2D" parent="KinematicBody2D"]
-position = Vector2( -64.371, -20.2866 )
-emitting = false
-amount = 100
-one_shot = true
-preprocess = 1.1
-explosiveness = 0.5
+[node name="Particles2D4" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( 17.9246, -5.65125 )
+amount = 20
+lifetime = 0.5
 randomness = 1.0
 fract_delta = false
 local_coords = false
-process_material = SubResource( 6 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
-[node name="Particles2D4" type="Particles2D" parent="KinematicBody2D"]
-position = Vector2( -9.33484, 31.1324 )
-emitting = false
-amount = 100
-one_shot = true
-preprocess = 1.1
-explosiveness = 0.5
+[node name="Particles2D5" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( 5.17615, -17.5812 )
+amount = 20
+lifetime = 0.4
 randomness = 1.0
 fract_delta = false
 local_coords = false
-process_material = SubResource( 6 )
-texture = ExtResource( 5 )
+process_material = SubResource( 8 )
+texture = ExtResource( 1 )
+
+[node name="Particles2D6" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( -37.4738, -69.3777 )
+amount = 20
+lifetime = 0.6
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 2 )
+
+[node name="Particles2D7" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( 39.7404, -3.86523 )
+amount = 20
+lifetime = 0.3
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D8" type="Particles2D" parent="KinematicBody2D/Node2D"]
+position = Vector2( -76.9912, -22.0731 )
+amount = 20
+lifetime = 0.5
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 9 )
+
+[node name="icon2" type="Sprite" parent="KinematicBody2D"]
+texture = ExtResource( 5 )
+
+[node name="Node2D2" type="Node2D" parent="KinematicBody2D"]
+
+[node name="Particles2D12" type="Particles2D" parent="KinematicBody2D/Node2D2"]
+position = Vector2( -71.9648, 23.7238 )
+scale = Vector2( 0.5, 0.5 )
+amount = 20
+lifetime = 0.4
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 1 )
+
+[node name="Particles2D11" type="Particles2D" parent="KinematicBody2D/Node2D2"]
+position = Vector2( 50.89, 42.1633 )
+scale = Vector2( 0.5, 0.5 )
+amount = 20
+lifetime = 0.6
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 2 )
+
+[node name="Particles2D9" type="Particles2D" parent="KinematicBody2D/Node2D2"]
+position = Vector2( -40.5604, 54.2285 )
+scale = Vector2( 0.5, 0.5 )
+amount = 20
+lifetime = 0.3
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D10" type="Particles2D" parent="KinematicBody2D/Node2D2"]
+position = Vector2( 8.46985, 55.3058 )
+scale = Vector2( 0.5, 0.5 )
+amount = 20
+lifetime = 0.5
+randomness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 8 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 456.619, 422.158 )
+scale = Vector2( 5.3891, 1 )
+physics_material_override = SubResource( 1 )
+
+[node name="icon" type="Sprite" parent="StaticBody2D"]
+modulate = Color( 0, 0, 0, 1 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 2 )
 [connection signal="input_event" from="KinematicBody2D" to="KinematicBody2D" method="_on_KinematicBody2D_input_event"]
