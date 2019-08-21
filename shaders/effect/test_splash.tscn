@@ -3,12 +3,12 @@
 [ext_resource path="res://shaders/efx_splash.shader" type="Shader" id=1]
 [ext_resource path="res://res/icon.png" type="Texture" id=2]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/ps = 0.649
+shader_param/ps = 0.64
 shader_param/range = 0.235
 
-[sub_resource type="ArrayMesh" id=3]
+[sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
 "aabb": AABB( -64, -64, 0, 128, 128, 0 ),
 "array_data": PoolByteArray( 0, 0, 128, 66, 102, 102, 116, 194, 0, 0, 128, 63, 154, 153, 185, 60, 0, 0, 128, 66, 0, 0, 120, 66, 0, 0, 128, 63, 0, 0, 124, 63, 0, 0, 116, 66, 0, 0, 120, 66, 0, 0, 122, 63, 0, 0, 124, 63, 0, 0, 120, 194, 0, 0, 128, 66, 0, 0, 128, 60, 0, 0, 128, 63, 0, 0, 120, 194, 102, 102, 120, 66, 0, 0, 128, 60, 51, 51, 124, 63, 0, 0, 128, 194, 52, 51, 115, 66, 0, 0, 0, 0, 154, 153, 121, 63, 0, 0, 128, 194, 0, 0, 108, 194, 0, 0, 0, 0, 0, 0, 32, 61, 0, 0, 108, 194, 51, 51, 127, 194, 0, 0, 32, 61, 205, 204, 204, 58, 204, 204, 108, 66, 0, 0, 128, 194, 102, 102, 118, 63, 0, 0, 0, 0 ),
@@ -24,14 +24,14 @@ surfaces/0 = {
 [node name="test_splash" type="Node2D"]
 
 [node name="icon" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 848.121, 268.939 )
 scale = Vector2( 2.72719, 2.72719 )
 texture = ExtResource( 2 )
 
 [node name="icon2" type="MeshInstance2D" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 258.065, 289.321 )
 scale = Vector2( 2.72719, 2.72719 )
-mesh = SubResource( 3 )
+mesh = SubResource( 2 )
 texture = ExtResource( 2 )
